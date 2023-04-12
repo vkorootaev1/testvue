@@ -1,11 +1,13 @@
 <template>
-  <modal-window
-    :node="node"
-    v-if="isModalWindowVisible"
-    @closeModalWindow="editNodeClose"
-    @saveEditNode="saveEditNode"
-  />
-  <li class="node-tree list-group-item">
+  <transition name="modal">
+    <modal-window
+      :node="node"
+      v-if="isModalWindowVisible"
+      @closeModalWindow="editNodeClose"
+      @saveEditNode="saveEditNode"
+    />
+  </transition>
+  <tr>
     <i
       v-if="!isShowChildren && node.children.length"
       class="fa fa-chevron-circle-right"
@@ -37,15 +39,15 @@
       @click="editNodeOpen"
       aria-hidden="true"
     ></i>
-    <ul v-if="node.children && node.children.length && isShowChildren">
-      <node
-        v-for="(child, index) in node.children"
-        :node="child"
-        :key="index"
-        :select-node="selectNode"
-      ></node>
-    </ul>
-  </li>
+  </tr>
+  <tr v-if="node.children && node.children.length && isShowChildren">
+    <node
+      v-for="(child, index) in node.children"
+      :node="child"
+      :key="index"
+      :select-node="selectNode"
+    ></node>
+  </tr>
 </template>
 
 <script>

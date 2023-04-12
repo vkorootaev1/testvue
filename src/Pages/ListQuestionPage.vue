@@ -35,7 +35,9 @@
             >
               {{ truncate(question.text_ru) }}
             </router-link>
-            <span class="badge rounded-pill deletebutton" @click="deleteTree(question)"
+            <span
+              class="badge rounded-pill deletebutton"
+              @click="deleteTree(question)"
               ><i class="fa fa-trash" aria-hidden="true"></i
             ></span>
           </li>
@@ -70,13 +72,16 @@ export default {
       this.questions = response.data;
     },
     async deleteTree(delete_question) {
-      const response = axios.delete(
+      const response = await axios.delete(
         `http://192.168.0.5:8000/api/v1/node/${delete_question.id}/`
       );
-      if ([200, 202, 204].includes((await response).status)) {
-        this.questions.splice(
-          this.questions.findIndex((obj) => obj.id === delete_question.id)
+      if ([200, 202, 204].includes(response.status)) {
+        const indexDelete = this.questions.findIndex(
+          (n) => n.id === delete_question.id
         );
+        if (indexDelete !== -1) {
+          this.questions.splice(indexDelete, 1);
+        }
         this.errors.error_status = false;
       } else {
         this.errors.error_status = true;
@@ -110,7 +115,15 @@ export default {
 .searching {
   margin-bottom: 10px;
 }
-.deletebutton{
+.deletebutton {
   cursor: pointer;
+}
+
+a {
+  color: #332d2d;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
 }
 </style>

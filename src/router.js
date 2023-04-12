@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import TreeShowPage from "./Pages/TreeShowPage.vue";
 import ListQuestionPage from "./Pages/ListQuestionPage.vue";
 import TreeCreatePage from "./Pages/TreeCreatePage";
+import ListUserQuestionNotResolvedPage from "./Pages/ListUserQuestionNotResolvedPage";
 
 export default createRouter({
   history: createWebHistory(),
@@ -21,6 +22,11 @@ export default createRouter({
       path: "/tree/create",
       name: "createtree",
       component: TreeCreatePage,
+    },
+    {
+      path: "/user/questions/notresolved",
+      name: "userquestionsnotresolved",
+      component: ListUserQuestionNotResolvedPage,
     },
   ],
 });
