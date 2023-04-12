@@ -7,7 +7,7 @@
       @saveEditNode="saveEditNode"
     />
   </transition>
-  <tr>
+  <li>
     <i
       v-if="!isShowChildren && node.children.length"
       class="fa fa-chevron-circle-right"
@@ -39,15 +39,15 @@
       @click="editNodeOpen"
       aria-hidden="true"
     ></i>
-  </tr>
-  <tr v-if="node.children && node.children.length && isShowChildren">
-    <node
-      v-for="(child, index) in node.children"
-      :node="child"
-      :key="index"
-      :select-node="selectNode"
-    ></node>
-  </tr>
+    <ul v-if="node.children && node.children.length && isShowChildren">
+      <node
+        v-for="(child, index) in node.children"
+        :node="child"
+        :key="index"
+        :select-node="selectNode"
+      ></node>
+    </ul>
+  </li>
 </template>
 
 <script>
