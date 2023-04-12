@@ -65,6 +65,11 @@ export default {
       isShowModal: false,
     };
   },
+  watch: {
+    $route() {
+      document.getElementById("navbarSupportedContent").classList.remove("show");
+    },
+  },
   components: {
     ModalMassMailing,
   },
